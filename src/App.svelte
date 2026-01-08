@@ -3,19 +3,10 @@
   import ThemeToggle from './components/ThemeToggle.svelte';
   import CardList from './components/CardList.svelte';
 
+  // State untuk dark mode
   let isDark = false;
 
-  // Reactive statement untuk apply theme ke body
-  $: {
-    if (typeof document !== 'undefined') {
-      if (isDark) {
-        document.body.classList.add('dark-theme');
-      } else {
-        document.body.classList.remove('dark-theme');
-      }
-    }
-  }
-
+  // Function untuk handle theme change dari child component
   function handleThemeChange(event) {
     isDark = event.detail.isDark;
   }
@@ -49,18 +40,18 @@
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     transition: background-color 0.3s, color 0.3s;
-    background: #f5f5f5;
-    color: #333;
-  }
-
-  :global(body.dark-theme) {
-    background: #1a1a1a;
-    color: #f5f5f5;
   }
 
   main {
     min-height: 100vh;
+    background: #f5f5f5;
+    color: #333;
     padding: 2rem;
+  }
+
+  main.dark {
+    background: #1a1a1a;
+    color: #f5f5f5;
   }
 
   .container {
@@ -83,7 +74,7 @@
     font-size: 1.1rem;
   }
 
-  :global(body.dark-theme) .subtitle {
+  main.dark .subtitle {
     color: #999;
   }
 
@@ -100,7 +91,7 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
 
-  :global(body.dark-theme) .card {
+  main.dark .card {
     background: #2a2a2a;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
